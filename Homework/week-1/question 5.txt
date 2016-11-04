@@ -1,0 +1,1 @@
+File that contains SHA-1 checksum of the commit
