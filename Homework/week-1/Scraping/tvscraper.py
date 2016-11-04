@@ -46,15 +46,14 @@ def extract_tvseries(dom):
         rating = link.by_tag("strong")
         series.append(rating[0].content.encode("ASCII", "ignore"))
 
-        # extracts genre and removes
+        # extracts genre and removes whitespace
         genre = link.by_class("genre")
         series.append(genre[0].content.encode("ASCII", "ignore").strip())
 
-        # extracts all actors, removes whitespaces and joins them in one list
+        # extracts all actors, removes whitespace and joins them in one list
         actors = []
         for p in link.by_tag("p"):
             for stars in p.by_tag("a"):
-                 # actors.append(unicodedata.normalize("NFKD", stars.content).encode("ASCII", "ignore"))
                  actors.append(stars.content.encode("ASCII", "ignore").strip())
         series.append(', '.join(actors))
 
