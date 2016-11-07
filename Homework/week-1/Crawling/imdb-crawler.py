@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-# Name:
-# Student number:
+# Name: Swip Draijer
+# Student number: 10192239
 '''
 This script crawls the IMDB top 250 movies.
 '''
