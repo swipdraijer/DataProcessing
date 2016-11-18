@@ -1,20 +1,27 @@
+// Swip Draijer
+// 10192239
+// Assigns color to each country based on number of articles.
+
 window.onload = function() {
 
+	// Extracts length of country_codes and declares variables.
 	var all_countries = country_codes.length
-
 	var country_code
 	var country_id
 
+	// Loads articles from JSON data and parses to JavaScript object.
 	var data = document.getElementById("data")
 	var dataset = JSON.parse(data.value)
-	var length = dataset["points"].length
+	var all_data = dataset["points"].length
 
+	// Iterates through all countries to assign articles and country id based on country code.
 	for (i = 0; i < all_countries; i++)
 	{
 	    country_id = country_codes[i][0] 
 
-	    for (j = 0; j < length; j++)
+	    for (j = 0; j < all_data; j++)
 	    {
+	    	// Gets articles from dataset and uses that to assign color to each country. 
 	    	if (country_codes[i][1] == dataset["points"][j]["country"])
 	    	{
 	    		articles = dataset["points"][j]["articles"]
@@ -60,20 +67,15 @@ window.onload = function() {
 				{
 					changeColor(country_id, '7f0000')     
 				}
-
 	    	}
 	    }
 	}
 }
 
+// Fills country with color if id is present in SVG. 
 function changeColor(id, color) {
 	if (document.getElementById(id) != null)
 	{
 		document.getElementById(id).style.fill = color
 	}
-	else 
-	{
-		// console.log(id)
-	}
-
 }
