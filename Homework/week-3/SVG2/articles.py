@@ -20,5 +20,5 @@ out = "[\n\t" + ",\n\t".join([json.dumps(row) for row in reader]) + "\n]"
 
 jsonfile.write(out)
 
-# csvfile.close()
-# jsonfile.close()
+csvfile.close()
+jsonfile.close()

@@ -18,13 +18,13 @@ window.onload = function() {
 	    	if (country_codes[i][1] == dataset["points"][j]["country"])
 	    	{
 	    		articles = dataset["points"][j]["articles"]
-
-	    		if (articles < 1) 
-				{
-					changeColor(country_id, 'fff7ec')   
-				} 
-	    	
-	    		if (articles < 10) 
+					    		
+	    		if (articles == "")
+	    		{
+	    			changeColor(country_id, 'D0D0D0')   
+	    		}   	
+	    		
+	    		else if (articles < 10) 
 				{
 					changeColor(country_id, 'fff7ec')   
 				} 
