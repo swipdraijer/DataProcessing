@@ -2,10 +2,9 @@
 # Name: Swip Draijer
 # Student number: 10192239
 '''
-This script scrapes IMDB and outputs a CSV file with highest rated tv series.
+This script scrapes Wikipedia and outputs a CSV file.
 '''
 import csv
-import unicodedata
 
 from pattern.web import URL, DOM
 

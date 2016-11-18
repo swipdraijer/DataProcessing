@@ -1,7 +1,6 @@
 // Author: Robin Kuiper
 // Date: 27 03 2014
 
-
 // List of ISO 3166-1 alpha 2 country codes and
 // their respective alpha 3 country codes and country names.
 var country_codes = [

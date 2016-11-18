@@ -1,0 +1,20 @@
+/* Name: Swip Draijer */
+/* Student number: 10192239 */
+/* Cascading Style Sheets to allow easily changing how countries are displayed.*/
+
+/* Color of Europe */
+body
+{
+	fill: #ADD8E6; 
+}
+
+/* Country color */
+#fra
+{
+	fill: #0000ff;
+}
+
+#ita
+{
+	fill: #00ff00;
+} 
