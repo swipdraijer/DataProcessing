@@ -57,21 +57,6 @@ window.onload = function() {
 
 	chart.call(tip);
 
-	function measure(text, classname) {
-	  if(!text || text.length === 0) return {height: 0, width: 0};
-
-	  var container = d3.select('body').append('svg').attr('class', classname);
-	  container.append('text').attr({x: -1000, y: -1000}).text(text);
-
-	  var bbox = container.node().getBBox();
-	  container.remove();
-
-	  return {height: bbox.height, width: bbox.width};
-	}
-
-	// var titleSize = measure('my title', 'chart title'),
- //    margin.top = titleSize.height + 20; // add whatever padding you want 
-	
 	// Get data
 	d3.json("mammals.json", function(data) {
 
@@ -82,6 +67,18 @@ window.onload = function() {
 
 		// Scale the range of the data
 		x.domain(data.map(function(d) { return d.animal; }));
+		
+		// var selector = d3.select("#drop")
+  //   	.append("select")
+  //   	.attr("id","dropdown")
+  //   	.on("change", function(d){
+  //       	selection = document.getElementById("dropdown");
+
+  //       	y.domain([0, d3.max(data, function(d){
+		// 		return +d[selection.value];})]);
+
+  //       	yAxis.scale(y);
+
 		y.domain([0, d3.max(data, function(d) { return d.brain; })]);
 		
 		// Set x of bars and labels

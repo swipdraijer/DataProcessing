@@ -3,14 +3,19 @@
 		}
 
 		h1 {
-		    color: orangered;
+		    color: steelblue;
 		    font-family: verdana;
 		    font-size: 200%;
 		    text-align: center;
 		}
 
+		h2 {
+			font-size: 75%;
+			font-style:;
+
+		}
 		.bar {
-		  fill: darkgreen;
+		  fill: steelblue;
 		}
 
 		.bar:hover {
@@ -31,7 +36,7 @@
 		.x.axis path {
 		  display: none;
 		}
-	
+
 		.d3-tip {
 		  line-height: 1;
 		  font-weight: bold;
