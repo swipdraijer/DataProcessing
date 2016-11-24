@@ -59,26 +59,15 @@ window.onload = function() {
 
 	// Get data
 	d3.json("mammals.json", function(data) {
-
+		
 		data.forEach(function(d) {
       	  d.body = +d.body;
       	  d.brain = +d.brain;
+        
         });
 
 		// Scale the range of the data
 		x.domain(data.map(function(d) { return d.animal; }));
-		
-		// var selector = d3.select("#drop")
-  //   	.append("select")
-  //   	.attr("id","dropdown")
-  //   	.on("change", function(d){
-  //       	selection = document.getElementById("dropdown");
-
-  //       	y.domain([0, d3.max(data, function(d){
-		// 		return +d[selection.value];})]);
-
-  //       	yAxis.scale(y);
-
 		y.domain([0, d3.max(data, function(d) { return d.brain; })]);
 		
 		// Set x of bars and labels
@@ -99,7 +88,7 @@ window.onload = function() {
 	      .call(yAxis)
 	      .append("text")
 			  .attr("transform", "rotate(-90)")
-			  .attr("y", -40)
+			  .attr("y", 0 - margin.left)
 			  .attr("dy", ".71em")
 			  .style("text-anchor", "end")
 		
@@ -113,8 +102,54 @@ window.onload = function() {
 		      .attr("height", function(d) { return height - y(d.brain); })
 		      .attr("width", x.rangeBand())
 		      .on('mouseover', tip.show)
-	     	  .on('mouseout', tip.hide);
+	    	  .on('mouseout', tip.hide);
 
-	});
+         });
 
 }
+
+    //     	d3.selectAll(".rectangle")
+    //        		.transition()
+	   //          .attr("height", function(d){
+				// 	return height - y(+d[selection.value]);
+				// })
+				// .attr("x", function(d, i){
+				// 	return (width / data.length) * i ;
+				// })
+				// .attr("y", function(d){
+				// 	return y(+d[selection.value]);
+				// })
+    //        		.ease("linear")
+    //        		.select("title")
+    //        		.text(function(d){
+    //        			return d.State + " : " + d[selection.value];
+    //        		});
+      
+    //        	d3.selectAll("g.y.axis")
+    //        		.transition()
+    //        		.call(yAxis);	
+
+	   //  var selector = d3.select("#drop")
+    // 	.append("select")
+    // 	.attr("id","dropdown")
+    // 	.on("change", function(d){
+    //     	selection = document.getElementById("dropdown");
+
+    //     	y.domain([0, d3.max(data, function(d){
+				// return +d[selection.value];})]);
+
+    //     	yAxis.scale(y);
+
+    // selector.selectAll("option")
+    //   .data(elements)
+    //   .enter().append("option")
+    //   .attr("value", function(d){
+    //     return d;
+    //   })
+    //   .text(function(d){
+    //     return d;
+    //   })
+
+
+	// });
+
