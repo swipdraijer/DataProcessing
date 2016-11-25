@@ -25,9 +25,10 @@ window.onload = function() {
 	    .attr("x", width / 2 )
 	    .attr("y",  height + margin.bottom)
 	    .style("text-anchor", "right")
-	    .text("Animals")
+	    .text("animals")
 	    .style("font-weight", "bold")
-	    .style("font-size","20px");
+	    .style("font-size","18px")
+	    .style("fill","steelblue");
 
     // Set y-axis
     var y = d3.scale.linear()
@@ -45,9 +46,10 @@ window.onload = function() {
 	    .attr("x", 0 - (height / 2))
 	    .attr("dy", "30px")
 	    .style("text-anchor", "middle")
-	    .text("brain/body (%)")
+	    .text("brain mass / body mass (%)")
 	    .style("font-weight", "bold")
-	    .style("font-size","20px");
+	    .style("font-size","18px")
+	    .style("fill","steelblue");
 
   	// Set d3-tip
 	var tip = d3.tip()
@@ -60,8 +62,12 @@ window.onload = function() {
 
 	chart.call(tip);
 
+	var json = "mammals.json"
+
+	// document.addEventListener("click", myScript);
+
 	// Get data
-	d3.json("mammals.json", function(data) {
+	d3.json(json, function(data) {
 		
 		data.forEach(function(d) {
       	  d.body = +d.body;

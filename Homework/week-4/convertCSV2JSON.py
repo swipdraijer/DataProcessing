@@ -7,7 +7,7 @@ import csv
 import json
 
 # Opens data file and json file
-csvfilename = 'mammals.csv'
+csvfilename = 'mammals-sort.csv'
 jsonfilename = csvfilename.split('.')[0] + '.json'
 csvfile = open(csvfilename, 'r')
 jsonfile = open(jsonfilename, 'w')

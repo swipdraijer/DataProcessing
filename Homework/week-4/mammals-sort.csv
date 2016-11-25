@@ -1,0 +1,63 @@
+animal,body,brain,perc
+Ground squirrel,0.101,0.004,3.96
+Owl monkey,0.48,0.016,3.23
+Lesser short-tailed shrew,0.005,0,2.8
+Rhesus monkey,6.8,0.179,2.63
+Galago,0.2,0.005,2.5
+Little brown bat,0.01,0,2.5
+Mole rat,0.122,0.003,2.46
+Tree shrew,0.104,0.003,2.4
+Human,62,1.32,2.13
+Mouse,0.023,0,1.74
+Baboon,10.55,0.18,1.7
+Star-nosed mole,0.06,0.001,1.67
+Rock hyrax-a,0.75,0.012,1.64
+E. American mole,0.075,0.001,1.6
+Chinchilla,0.425,0.006,1.51
+Verbet,4.19,0.058,1.38
+Arctic fox,3.385,0.045,1.32
+Big brown bat,0.023,0,1.3
+Genet,1.41,0.018,1.24
+Red fox,4.235,0.05,1.19
+Patas monkey,10,0.115,1.15
+Raccoon,4.288,0.039,0.91
+Slow loris,1.4,0.013,0.89
+Chimpanzee,52.16,0.44,0.84
+Golden hamster,0.12,0.001,0.83
+Echidna,3,0.025,0.83
+Cat,3.3,0.026,0.78
+Phalanger,1.62,0.011,0.7
+Musk shrew,0.048,0,0.69
+Rat,0.28,0.002,0.68
+Roe deer,14.83,0.098,0.66
+African giant pouched rat,1,0.007,0.66
+Arctic ground squirrel,0.92,0.006,0.62
+Tree hyrax,2,0.012,0.62
+Mountain beaver,1.35,0.008,0.6
+Rock hyrax-b,3.6,0.021,0.58
+Guinea pig,1.04,0.006,0.53
+Rabbit,2.5,0.012,0.48
+European hedgehog,0.785,0.004,0.45
+Desert hedgehog,0.55,0.002,0.44
+Goat,27.66,0.115,0.42
+Yellow-bellied marmot,4.05,0.017,0.42
+Grey seal,85,0.325,0.38
+N.A. opossum,1.7,0.006,0.37
+Grey wolf,36.33,0.12,0.33
+Sheep,55.5,0.175,0.32
+Nine-banded armadillo,3.5,0.011,0.31
+Tenrec,0.9,0.003,0.29
+Donkey,187.1,0.419,0.22
+Gorilla,207,0.406,0.2
+Okapi,250,0.49,0.2
+Asian elephant,2547,4.603,0.18
+Kangaroo,35,0.056,0.16
+Jaguar,100,0.157,0.16
+Giant armadillo,60,0.081,0.14
+Horse,521,0.655,0.13
+Giraffe,529,0.68,0.13
+Water opossum,3.5,0.004,0.11
+Brazilian tapir,160,0.169,0.11
+Cow,465,0.423,0.09
+African elephant,6654,5.712,0.09
+Pig,192,0.18,0.09
