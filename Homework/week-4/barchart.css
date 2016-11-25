@@ -1,6 +1,6 @@
 		/* Sets font size and style for all text in body */
 		body {
- 		  font: 15px sans-serif;
+ 		  font-size: 12.5px;
  		  font-family: verdana;
 		}
 
@@ -11,14 +11,7 @@
 		    text-align: center;
 		}
 
-		/* Sets properties for source */
-		h2 {
-			font-size: 75%;
-			font-style:;
-
-
 		/* Sets properties for bars */
-		}
 		.bar {
 		  fill: steelblue;
 		}
@@ -28,14 +21,10 @@
 		}
 
 		/* Sets properties for text in axes */
-		.axis text {
-		  font: 10px sans-serif;
-		}
 		.axis text:hover {
-		  font-size: 200%
-		  margin.bottom: 300;
+		  fill: orangered;
+		  font-size: 110%;
 		}
-
 
 		/* Sets properties for axes */
 		.axis path,

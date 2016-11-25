@@ -1,16 +1,7 @@
-// var width_screen;
-// var height_screen;
-
-// window.onresize = function() {
-// 	var width_screen = d3.select("body").node().getBoundingClientRect().width
-// 	var height_screen = d3.select("body").node().getBoundingClientRect().height
-
-// console.log(width_screen, height_screen)
-
 window.onload = function() {
 	
     // Set margins
-    var margin = {top: 20, right: 30, bottom: 150, left: 60},
+    var margin = {top: 20, right: 40, bottom: 200, left: 80},
     	width = 960 - margin.left - margin.right,
     	height = 500 - margin.top - margin.bottom;
 
@@ -35,34 +26,36 @@ window.onload = function() {
 	    .attr("y",  height + margin.bottom)
 	    .style("text-anchor", "right")
 	    .text("Animals")
-	    .style("font-weight", "bold");
+	    .style("font-weight", "bold")
+	    .style("font-size","20px");
 
     // Set y-axis
     var y = d3.scale.linear()
     	.range([height, 0]);
  
-
 	var yAxis = d3.svg.axis()
 	    .scale(y)
 	    .orient("left")
-	    .ticks(10, "kg");
+	    .ticks(10, "");
 
 	// Set y-axis title
 	chart.append("text")
 	    .attr("transform", "rotate(-90)")
 	    .attr("y", 0 - margin.left)
 	    .attr("x", 0 - (height / 2))
-	    .attr("dy", "1em")
+	    .attr("dy", "30px")
 	    .style("text-anchor", "middle")
-	    .text("Weight (kg)")
-	    .style("font-weight", "bold");
+	    .text("brain/body (%)")
+	    .style("font-weight", "bold")
+	    .style("font-size","20px");
 
   	// Set d3-tip
 	var tip = d3.tip()
 	  .attr('class', 'd3-tip')
 	  .offset([-10, 0])
 	  .html(function(d) {
-	    return "<strong>Weight (kg):</strong> <span style='color:red'>" + d.brain + "</span>";
+	    return "<strong>Animal:</strong> <span style='color:steelblue'>" + d.animal + "</span>" +
+	    "<br><strong>Ratio brain/body:</strong> <span style='color:red'>" + d.percbrain + "%</br></span>";
    	  })
 
 	chart.call(tip);
@@ -73,12 +66,11 @@ window.onload = function() {
 		data.forEach(function(d) {
       	  d.body = +d.body;
       	  d.brain = +d.brain;
-        
         });
 
 		// Scale the range of the data
 		x.domain(data.map(function(d) { return d.animal; }));
-		y.domain([0, d3.max(data, function(d) { return d.brain; })]);
+		y.domain([0, d3.max(data, function(d) { return d.percbrain; })]);
 		
 		// Set x of bars and labels
 		chart.append("g")
@@ -88,10 +80,10 @@ window.onload = function() {
 	 	  .selectAll("text")
 		    .attr("y", 0)
 		    .attr("x", 9)
-		    .attr("dy", ".35em")
-		    .attr("transform", "rotate(90)")
+		    .attr("dy", ".50em")
+		    .attr("transform", "rotate(70)")
 		    .style("text-anchor", "start")
-		  	
+	
 		// Set y of bars and labels
 	    chart.append("g")
 	      .attr("class", "y axis")
@@ -99,7 +91,7 @@ window.onload = function() {
 	      .append("text")
 			  .attr("transform", "rotate(-90)")
 			  .attr("y", 0 - margin.left)
-			  .attr("dy", ".71em")
+			  // .attr("dy", ".91em")
 			  .style("text-anchor", "end")
 		
 		// Set bars
@@ -108,58 +100,13 @@ window.onload = function() {
 	      .enter().append("rect")
 		      .attr("class", "bar")
 		      .attr("x", function(d) { return x(d.animal); })
-		      .attr("y", function(d) { return y(d.brain); })
-		      .attr("height", function(d) { return height - y(d.brain); })
+		      .attr("y", function(d) { return y(d.percbrain); })
+		      .attr("height", function(d) { return height - y(d.percbrain); })
 		      .attr("width", x.rangeBand())
 		      .on('mouseover', tip.show)
 	    	  .on('mouseout', tip.hide);
 
          });
-
 }
 
-    //     	d3.selectAll(".rectangle")
-    //        		.transition()
-	   //          .attr("height", function(d){
-				// 	return height - y(+d[selection.value]);
-				// })
-				// .attr("x", function(d, i){
-				// 	return (width / data.length) * i ;
-				// })
-				// .attr("y", function(d){
-				// 	return y(+d[selection.value]);
-				// })
-    //        		.ease("linear")
-    //        		.select("title")
-    //        		.text(function(d){
-    //        			return d.State + " : " + d[selection.value];
-    //        		});
-      
-    //        	d3.selectAll("g.y.axis")
-    //        		.transition()
-    //        		.call(yAxis);	
-
-	   //  var selector = d3.select("#drop")
-    // 	.append("select")
-    // 	.attr("id","dropdown")
-    // 	.on("change", function(d){
-    //     	selection = document.getElementById("dropdown");
-
-    //     	y.domain([0, d3.max(data, function(d){
-				// return +d[selection.value];})]);
-
-    //     	yAxis.scale(y);
-
-    // selector.selectAll("option")
-    //   .data(elements)
-    //   .enter().append("option")
-    //   .attr("value", function(d){
-    //     return d;
-    //   })
-    //   .text(function(d){
-    //     return d;
-    //   })
-
-
-	// });
-
+  
