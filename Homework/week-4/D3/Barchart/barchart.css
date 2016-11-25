@@ -8,10 +8,10 @@
 		h1 {
 		    color: orangered;
 		    font-size: 200%;
-		    text-align: center;
+		    text-align: left;
 		}
 
-		/* Sets properties for paragraphs */
+		/* Sets properties for chart legend and source */
 		p {
 			text-align: justify;
 		}
