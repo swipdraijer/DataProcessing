@@ -2,6 +2,7 @@ window.onload = function() {
 
 	// Selects JSON data file 
 	makeChart("mammals.json");
+
 }
 
 function makeChart(json) {
@@ -14,9 +15,9 @@ function makeChart(json) {
 	// Set chart 
 	var chart = d3.select(".chart")
 	    .attr("width", width + margin.left + margin.right)
-	   	 .attr("height", height + margin.top + margin.bottom)
+	   	.attr("height", height + margin.top + margin.bottom)
 	  	.append("g")
-	   	 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	   	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     // Set x-axis
     var x = d3.scale.ordinal()
@@ -72,8 +73,8 @@ function makeChart(json) {
 	d3.json(json, function(data) {
 		
 		data.forEach(function(d) {
-      	  d.body = +d.body;
-      	  d.brain = +d.brain;
+      		d.body = +d.body;
+      		d.brain = +d.brain;
         });
 
 		// Scale the range of the data
