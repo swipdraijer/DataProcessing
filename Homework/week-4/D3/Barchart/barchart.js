@@ -1,8 +1,7 @@
 window.onload = function() {
-	
-	// Sets JSON data file 
-	makeChart("mammals.json");
 
+	// Selects JSON data file 
+	makeChart("mammals.json");
 }
 
 function makeChart(json) {
