@@ -1,18 +1,23 @@
+		/* Sets font size and style for all text in body */
 		body {
  		  font: 15px sans-serif;
+ 		  font-family: verdana;
 		}
 
+		/* Sets properties for title */
 		h1 {
 		    color: steelblue;
-		    font-family: verdana;
 		    font-size: 200%;
 		    text-align: center;
 		}
 
+		/* Sets properties for source */
 		h2 {
 			font-size: 75%;
 			font-style:;
 
+
+		/* Sets properties for bars */
 		}
 		.bar {
 		  fill: steelblue;
@@ -22,10 +27,17 @@
 		  fill: orangered;
 		}
 
+		/* Sets properties for text in axes */
 		.axis text {
 		  font: 10px sans-serif;
 		}
+		.axis text:hover {
+		  font-size: 200%
+		  margin.bottom: 300;
+		}
 
+
+		/* Sets properties for axes */
 		.axis path,
 		.axis line {
 		  fill: none;
@@ -37,6 +49,7 @@
 		  display: none;
 		}
 
+		/* Creates d3-tip */
 		.d3-tip {
 		  line-height: 1;
 		  font-weight: bold;

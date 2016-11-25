@@ -1,5 +1,14 @@
-window.onload = function() {
+// var width_screen;
+// var height_screen;
 
+// window.onresize = function() {
+// 	var width_screen = d3.select("body").node().getBoundingClientRect().width
+// 	var height_screen = d3.select("body").node().getBoundingClientRect().height
+
+// console.log(width_screen, height_screen)
+
+window.onload = function() {
+	
     // Set margins
     var margin = {top: 20, right: 30, bottom: 150, left: 60},
     	width = 960 - margin.left - margin.right,
@@ -31,6 +40,7 @@ window.onload = function() {
     // Set y-axis
     var y = d3.scale.linear()
     	.range([height, 0]);
+ 
 
 	var yAxis = d3.svg.axis()
 	    .scale(y)
@@ -49,11 +59,11 @@ window.onload = function() {
 
   	// Set d3-tip
 	var tip = d3.tip()
-  	  .attr('class', 'd3-tip')
+	  .attr('class', 'd3-tip')
 	  .offset([-10, 0])
 	  .html(function(d) {
 	    return "<strong>Weight (kg):</strong> <span style='color:red'>" + d.brain + "</span>";
-    })
+   	  })
 
 	chart.call(tip);
 
