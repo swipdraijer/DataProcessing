@@ -1,6 +1,8 @@
 window.onload = function() {
-	makeChart("mammals.json");
 	
+	// Sets JSON data file 
+	makeChart("mammals.json");
+
 }
 
 function makeChart(json) {
@@ -33,7 +35,7 @@ function makeChart(json) {
 	    .text("animals")
 	    .style("font-weight", "bold")
 	    .style("font-size","25px")
-	    .style("fill","blue");
+	    .style("fill","orangered")
 
     // Set y-axis
     var y = d3.scale.linear()
@@ -54,7 +56,7 @@ function makeChart(json) {
 	    .text("brain mass / body mass (%)")
 	    .style("font-weight", "bold")
 	    .style("font-size","18px")
-	    .style("fill","blue");
+	    .style("fill","orangered");
 
   	// Set d3-tip
 	var tip = d3.tip()
@@ -98,7 +100,7 @@ function makeChart(json) {
 	      .append("text")
 			  .attr("transform", "rotate(-90)")
 			  .attr("y", 0 - margin.left)
-			  // .attr("dy", ".91em")
+			  .attr("dy", ".91em")
 			  .style("text-anchor", "end")
 		
 		// Set bars
@@ -113,39 +115,36 @@ function makeChart(json) {
 		      .on('mouseover', tip.show)
 	    	  .on('mouseout', tip.hide);
 
-	  //    d3.select("input").on("change", change);
+	   	// Sorts data
+	    d3.select("input").on("change", sort);
 
-	  // var sortTimeout = setTimeout(function() {
-	  //   d3.select("input").property("checked", true).each(change);
-	  // }, 2000);
+		function sort() {
+		
+	    // Copy-on-write since tweens are evaluated after a delay.
+	    var x0 = x.domain(data.sort(this.checked
+	        ? function(a, b) { return b.percbrain - a.percbrain; }
+	        : function(a, b) { return d3.ascending(a.animal, b.animal); })
+	        .map(function(d) { return d.animal; }))
+	        .copy();
 
-	  // function change() {
-	  //   clearTimeout(sortTimeout);
+	    chart.selectAll(".bar")
+	        .sort(function(a, b) { return x0(a.animal) - x0(b.animal); });
 
-	  //   // Copy-on-write since tweens are evaluated after a delay.
-	  //   var x0 = x.domain(data.sort(this.checked
-	  //       ? function(a, b) { return b.percbrain - a.percbrain; }
-	  //       : function(a, b) { return d3.ascending(a.animal, b.animal); })
-	  //       .map(function(d) { return d.animal; }))
-	  //       .copy();
+	    var transition = chart.transition().duration(750),
+	        delay = function(d, i) { return i * 50; };
 
-	  //   chart.selectAll(".bar")
-	  //       .sort(function(a, b) { return x0(a.animal) - x0(b.animal); });
+	    transition.selectAll(".bar")
+	        .delay(delay)
+	        .attr("x", function(d) { return x0(d.animal); });
 
-	  //   var transition = chart.transition().duration(750),
-	  //       delay = function(d, i) { return i * 50; };
-
-	  //   transition.selectAll(".bar")
-	  //       .delay(delay)
-	  //       .attr("x", function(d) { return x0(d.animal); });
-
-	  //   transition.select(".x axis")
-	  //       .call(xAxis)
-	  //     .selectAll("g")
-	  //       .delay(delay);
-	  // }	  
-
-
-
-        });
+	    transition.select(".x.axis")
+	        .call(xAxis)
+	        .selectAll("text")
+	      		.attr("y", 0)
+			    .attr("x", 9)
+			    .attr("dy", ".50em")
+			    .attr("transform", "rotate(70)")
+			    .style("text-anchor", "start")
+		}	  
+    });
 }  
