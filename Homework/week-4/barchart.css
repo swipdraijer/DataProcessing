@@ -6,9 +6,14 @@
 
 		/* Sets properties for title */
 		h1 {
-		    color: steelblue;
+		    color: blue;
 		    font-size: 200%;
 		    text-align: center;
+		}
+
+		/* Sets properties for paragraphs */
+		p {
+			text-align: justify;
 		}
 
 		/* Sets properties for bars */

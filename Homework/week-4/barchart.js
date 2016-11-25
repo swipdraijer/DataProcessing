@@ -1,4 +1,9 @@
 window.onload = function() {
+	makeChart("mammals.json");
+	
+}
+
+function makeChart(json) {
 	
     // Set margins
     var margin = {top: 20, right: 40, bottom: 200, left: 80},
@@ -27,8 +32,8 @@ window.onload = function() {
 	    .style("text-anchor", "right")
 	    .text("animals")
 	    .style("font-weight", "bold")
-	    .style("font-size","18px")
-	    .style("fill","steelblue");
+	    .style("font-size","25px")
+	    .style("fill","blue");
 
     // Set y-axis
     var y = d3.scale.linear()
@@ -49,7 +54,7 @@ window.onload = function() {
 	    .text("brain mass / body mass (%)")
 	    .style("font-weight", "bold")
 	    .style("font-size","18px")
-	    .style("fill","steelblue");
+	    .style("fill","blue");
 
   	// Set d3-tip
 	var tip = d3.tip()
@@ -61,10 +66,6 @@ window.onload = function() {
    	  })
 
 	chart.call(tip);
-
-	var json = "mammals.json"
-
-	// document.addEventListener("click", myScript);
 
 	// Get data
 	d3.json(json, function(data) {
@@ -112,7 +113,39 @@ window.onload = function() {
 		      .on('mouseover', tip.show)
 	    	  .on('mouseout', tip.hide);
 
-         });
-}
+	  //    d3.select("input").on("change", change);
 
-  
+	  // var sortTimeout = setTimeout(function() {
+	  //   d3.select("input").property("checked", true).each(change);
+	  // }, 2000);
+
+	  // function change() {
+	  //   clearTimeout(sortTimeout);
+
+	  //   // Copy-on-write since tweens are evaluated after a delay.
+	  //   var x0 = x.domain(data.sort(this.checked
+	  //       ? function(a, b) { return b.percbrain - a.percbrain; }
+	  //       : function(a, b) { return d3.ascending(a.animal, b.animal); })
+	  //       .map(function(d) { return d.animal; }))
+	  //       .copy();
+
+	  //   chart.selectAll(".bar")
+	  //       .sort(function(a, b) { return x0(a.animal) - x0(b.animal); });
+
+	  //   var transition = chart.transition().duration(750),
+	  //       delay = function(d, i) { return i * 50; };
+
+	  //   transition.selectAll(".bar")
+	  //       .delay(delay)
+	  //       .attr("x", function(d) { return x0(d.animal); });
+
+	  //   transition.select(".x axis")
+	  //       .call(xAxis)
+	  //     .selectAll("g")
+	  //       .delay(delay);
+	  // }	  
+
+
+
+        });
+}  

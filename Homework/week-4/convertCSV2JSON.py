@@ -7,13 +7,13 @@ import csv
 import json
 
 # Opens data file and json file
-csvfilename = 'mammals-sort.csv'
+csvfilename = 'mammals-sort-lowhigh.csv'
 jsonfilename = csvfilename.split('.')[0] + '.json'
 csvfile = open(csvfilename, 'r')
 jsonfile = open(jsonfilename, 'w')
 
 # Assigns field names and reads through csv file
-fieldnames = ('animal', 'body', 'brain', 'percbrain')
+fieldnames = ('animal', 'body', 'brain', 'perc')
 reader = csv.DictReader( csvfile, fieldnames)
 
 # Writes each row to jsonfile
