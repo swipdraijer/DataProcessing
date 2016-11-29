@@ -1,3 +1,8 @@
+// Swip Draijer 
+// 10192239
+// Data Processing
+// JavaScript file to create bar chart with brain-to-body ratios of land mammals
+
 window.onload = function() {
 
 	// Selects JSON data file 
