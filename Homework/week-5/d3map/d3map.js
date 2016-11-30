@@ -1,98 +1,61 @@
-// var basic_choropleth = new Datamap({
-//   element: document.getElementById("basic_choropleth"),
-//   projection: 'mercator',
-//   fills: {
-//     defaultFill: "#ABDDA4",
-//     life_expectancy: "#fa0fa0"
-//   },
-//   data: {
-//     USA: { fillKey: "authorHasTraveledTo" },
-//     JPN: { fillKey: "authorHasTraveledTo" },
-//     ITA: { fillKey: "authorHasTraveledTo" },
-//     CRI: { fillKey: "authorHasTraveledTo" },
-//     KOR: { fillKey: "authorHasTraveledTo" },
-//     DEU: { fillKey: "authorHasTraveledTo" },
-//   }
-// })
+var life = {};
+var bins = ['50', '50-55', '55-60', '60-65', '60-65', '65-70', '70-75', '75-80', '80-85', '80']
+var formatNumber = d3.format('.2f');
 
-$("#map").datamap({
-   scope: 'world',
-   geography_config: {
-     borderColor: 'rgba(255,255,255,0.3)',
-     highlightBorderColor: 'rgba(0,0,0,0.5)',
-     popupTemplate: _.template([
-       '<div class="hoverinfo">',
-       '<strong><%= geography.properties.name %></strong><br/>',
-       '<% if (data.years) { %>',
-       'Life expectancy (years): <%= data.years %><br/> <% } %>',
-       ,
-       '</div>'
-      ].join('') )
-   },
-   fills: {
-     life_75_80: 'blue',
-     life_55_60: 'lightblue',
-     defaultFill: 'grey' 
-   },
-   data: {
-      'CHN' : { 
-       fillKey: 'life_75_80',
-       years: '75.78226829',
-       },
-      'CMR' : {
-       fillKey: 'life_55_60',
-       years: '55.4927561',
-      }
+d3.csv("lifeexpectancy.csv", function(data) {
+  
+  data.forEach(function(d) {
+
+    life[d.code] = { 
+         fillKey: bins[Math.floor((d.years - 48) / 5)],
+         years: +formatNumber(d.years),
+    }
+
+  });
+
+  console.log(life);
+  // console.log(Math.min(data.years))       
+  // console.log(Math.min.apply(null, data.years))
+  // Math.min(...numbers)
+
+// d3.format(",.2f")
+  var colorbrewer = ['#fff7fb','#ece7f2','#d0d1e6','#a6bddb','#74a9cf','#3690c0','#0570b0','#034e7b']
+  
+  var map = new Datamap({
+        
+        element: document.getElementById('container'),
+        geographyConfig: {
+            highlightOnHover: true,
+            borderColor: 'rgba(255,255,255,0.3)',
+            highlightBorderColor: 'rgba(0,0,0,0.5)',
+            popupOnHover: true,
+            popupTemplate: function(geo, data) {
+                if (data.years >= 0)
+                {
+                        return ['<div class="hoverinfo"><strong>',
+                                 '' + geo.properties.name + '\n',
+                                 'Life expectancy at birth: ' + data.years + ' years',
+                                '</strong></div>'].join('');
+                }
+              }
+           },
+        fills: {
+            '50': colorbrewer[0],
+            '50-55': colorbrewer[1],
+            '55-60': colorbrewer[2],
+            '60-65': colorbrewer[3],
+            '65-70': colorbrewer[4],
+            '70-75': colorbrewer[5],
+            '75-80': colorbrewer[6],
+            '85': colorbrewer[7],
+            defaultFill: 'black'
+        },
+       
+        data: life
    
-//      'LBY': {
-//        fillKey: 'conflict',
-//        name: '2011–present Libyan factional fighting',
-//        startOfConflict: 2011
-//       },
-//      'IRQ': {
-//        fillKey: 'conflict',
-//        name: 'Iraqi insurgency (post U.S. withdrawal)',
-//        startOfConflict: 2011
-//       },
-//      'SYR': {
-//        fillKey: 'conflict',
-//        name: 'Syrian civil war',
-//        startOfConflict: 2011
-//       },
-//      'SDN': {
-//        fillKey: 'conflict',
-//        name: 'Sudan internal conflict',
-//        startOfConflict: 2011
-//       },
-//      'MEX': {
-//        fillKey: 'conflict',
-//        name: 'Mexican Drug War',
-//        startOfConflict: 2006
-//       },
-//      'PAK': {
-//        fillKey: 'conflict',
-//        name: 'War in North-West Pakistan',
-//        startOfConflict: 2004
-//       },
-//      'YEM': {
-//        fillKey: 'conflict',
-//        name: 'Al-Qaeda insurgency in Yemen',
-//        startOfConflict: 2001
-//       },
-//      'MMR': {
-//        fillKey: 'conflict',
-//        name: 'Internal conflict in Burma (Myanmar)',
-//        startOfConflict: 1948
-//       },
-//      'COL': {
-//        fillKey: 'conflict',
-//        name: 'Colombian conflict',
-//        startOfConflict: 1964
-//       },
-//      'AFG': {
-//        fillKey: 'conflict',
-//        name: 'War in Afghanistan',
-//        startOfConflict: 1978
-//       }
-   }
+    });
+
+  map.legend();
+
 });
+
