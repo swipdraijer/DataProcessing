@@ -1,20 +1,48 @@
+<!-- Swip Draijer -->
+<!-- 10192239 -->
+<!-- Data Processing -->
+<!-- D3 map of global life expectancy data -->
+
 <!DOCTYPE html>
   <head>
   	<title> Life Expectancy </title>
-	<link rel="shortcut icon" type="image/png" href="http://aux.iconpedia.net/uploads/19231319111144971816.png"/>
-	<script src="d3.min.js" charset="utf-8"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
-  <script src="http://datamaps.github.io/scripts/0.4.4/datamaps.world.min.js"></script>
-  
-
-	<!-- 	<link rel="stylesheet" type="text/css" href="d3map.css"> -->
-  
+  	<link rel="shortcut icon" type="image/png" href="http://aux.iconpedia.net/uploads/19231319111144971816.png"/>
+  	<script src="d3.min.js" charset="utf-8"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+    <script src="http://datamaps.github.io/scripts/0.4.4/datamaps.world.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="d3map.css">
   </head>
   <body>
-  	<div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
-  	<script src="d3map.js"></script> 
-    <p> At the bottom of d3map.html (the HTML page that contains the map you are making) briefly explain the design choices you made with regard to interactivity. What kind of mouseover effects did you enable and why? What visual queries does your map support and what ones does it not?
+    <h1> Global life expectancy at birth in 2014 </h1>
+    <p> Data: <a href = http://data.worldbank.org/indicator/SP.DYN.LE00.IN> World Bank</a> 
+    Colors: <a href = http://colorbrewer2.org/#type=sequential&scheme=Blues&n=9> ColorBrewer</a>
+    Author: Swip Draijer </p>
 
-Submit your completed files in a folder titled d3map containing d3map.html, d3map.css, and d3map.js. Note that you may not need d3map.css here unless you would like to change additional styling with regard to text, margins, etc.</p>
+    <div id="info"></div>
+    <p> Lower life expectancy than global average in <strong><font color=red> red </font></strong>
+    <br> Higher life expectancy than global average in <strong><font color=green> green </font></strong><br></p> 
+  
+    <div class='my-legend'>
+      <div class='legend-title'><p><b>Life expectancy at birth (years)</b></p></div>
+      <div class='legend-scale'>
+        <ul class='legend-labels'>
+          <div id = 'labels'>
+        </ul>
+    </div>
+
+  	<br><div id="container" style="position: relative; width: 1000px; height: 600px;"></div></br>
+   
+  	<script src="d3map.js"></script> 
+    
+    <p></br><u> Disclaimer </u></br></p>
+    <p align = 'justify'>A sequential color series is used to logically arrange the data from high values to low values based on lightness. This way low numbers are represented by light shades of blue and high numbers by dark shades of blue. As the light-to-dark progression is data-dependent this is inituitive and understandable without comparing each shade to the legend. The bounds of encoding in each category are based on dynamic binning of numbers: the range of values between the minimum and maximum value in the data set is divided by the number of bins, which equals the number of colors to be used. </p>
+
+    <p align = 'justify'> Interactivity: 
+    <ul>
+      <li> Highlight borders and fill country to put focus on country of interest</li> 
+      <li> Popup window to add detailed information for each country</li>
+      <li> Visual queries in popup window to show raw values for life expectancy and to show in color red/green whether this value is below or above the global average. Visual queries map does not support: to click on country or popup to gain additional information as this does not greatly improve the visualization's message. </li>
+    </ul>
+    </p>
   </body>
   </html>

@@ -33,7 +33,6 @@ Bhutan,BTN,69.4712439
 Botswana,BWA,64.4292439
 Central African Republic,CAF,50.65778049
 Canada,CAN,81.95660976
-Central Europe and the Baltics,CEB,76.56332725
 Switzerland,CHE,82.84878049
 Channel Islands,CHI,80.6064878
 Chile,CHL,81.49619512
@@ -57,20 +56,12 @@ Dominica,DMA,
 Denmark,DNK,80.54878049
 Dominican Republic,DOM,73.50002439
 Algeria,DZA,74.80809756
-East Asia & Pacific (excluding high income),EAP,73.98572304
-Early-demographic dividend,EAR,69.03914207
-East Asia & Pacific,EAS,74.92850744
-Europe & Central Asia (excluding high income),ECA,71.89472566
-Europe & Central Asia,ECS,76.89220421
 Ecuador,ECU,75.8724878
 "Egypt, Arab Rep.",EGY,71.12170732
-Euro area,EMU,81.64866944
 Eritrea,ERI,63.66302439
 Spain,ESP,83.07804878
 Estonia,EST,77.23902439
 Ethiopia,ETH,64.03502439
-European Union,EUU,80.67381364
-Fragile and conflict affected situations,FCS,61.7210708
 Finland,FIN,81.12926829
 Fiji,FJI,70.08912195
 France,FRA,82.37317073
@@ -94,19 +85,12 @@ Guyana,GUY,66.40641463
 High income,HIC,80.58040627
 "Hong Kong SAR, China",HKG,83.9804878
 Honduras,HND,73.13570732
-Heavily indebted poor countries (HIPC),HPC,60.78548361
 Croatia,HRV,77.32926829
 Haiti,HTI,62.74743902
 Hungary,HUN,75.87317073
-IBRD only,IBD,72.04307307
-IDA & IBRD total,IBT,69.75320031
-IDA total,IDA,63.33352118
-IDA blend,IDB,63.32437044
 Indonesia,IDN,68.8884878
-IDA only,IDX,63.33861517
 Isle of Man,IMN,
 India,IND,68.01380488
-Not classified,INX,
 Ireland,IRL,81.15365854
 "Iran, Islamic Rep.",IRN,75.38931707
 Iraq,IRQ,69.39968293
@@ -125,21 +109,14 @@ St. Kitts and Nevis,KNA,
 "Korea, Rep.",KOR,82.15585366
 Kosovo,KSV,71.09756098
 Kuwait,KWT,74.58502439
-Latin America & Caribbean (excluding high income),LAC,74.71736292
 Lao PDR,LAO,66.11736585
 Lebanon,LBN,79.37309756
 Liberia,LBR,60.83441463
 Libya,LBY,71.71612195
 St. Lucia,LCA,75.04685366
-Latin America & Caribbean,LCN,74.94196452
-Least developed countries: UN classification,LDC,63.19044594
-Low income,LIC,61.27438557
 Liechtenstein,LIE,82.26097561
 Sri Lanka,LKA,74.79480488
-Lower middle income,LMC,67.25391713
-Low & middle income,LMY,69.68393989
 Lesotho,LSO,49.70058537
-Late-demographic dividend,LTE,75.11927316
 Lithuania,LTU,73.96585366
 Luxembourg,LUX,82.20731707
 Latvia,LVA,74.18780488
@@ -150,15 +127,12 @@ Monaco,MCO,
 Moldova,MDA,71.45587805
 Madagascar,MDG,65.08560976
 Maldives,MDV,76.77282927
-Middle East & North Africa,MEA,72.85437336
 Mexico,MEX,76.72185366
 Marshall Islands,MHL,
-Middle income,MIC,70.64114397
 "Macedonia, FYR",MKD,75.34239024
 Mali,MLI,57.98626829
 Malta,MLT,81.74634146
 Myanmar,MMR,65.85785366
-Middle East & North Africa (excluding high income),MNA,72.26739736
 Montenegro,MNE,76.18070732
 Mongolia,MNG,69.46390244
 Northern Mariana Islands,MNP,
@@ -178,7 +152,6 @@ Norway,NOR,81.75121951
 Nepal,NPL,69.60468293
 Nauru,NRU,
 New Zealand,NZL,81.40487805
-OECD members,OED,80.11714456
 Oman,OMN,77.08509756
 Other small states,OSS,66.4473324
 Pakistan,PAK,66.18336585
@@ -188,13 +161,11 @@ Philippines,PHL,68.26563415
 Palau,PLW,
 Papua New Guinea,PNG,62.60692683
 Poland,POL,77.25365854
-Pre-demographic dividend,PRE,58.36457966
 Puerto Rico,PRI,79.37473171
 "Korea, Dem. People?s Rep.",PRK,70.07468293
 Portugal,PRT,80.72195122
 Paraguay,PRY,72.92170732
 Pacific island small states,PSS,69.91903222
-Post-demographic dividend,PST,80.47215977
 French Polynesia,PYF,76.54168293
 Qatar,QAT,78.59680488
 Romania,ROU,75.06341463
@@ -211,10 +182,7 @@ El Salvador,SLV,72.75456098
 San Marino,SMR,
 Somalia,SOM,55.35480488
 Serbia,SRB,75.53414634
-Sub-Saharan Africa (excluding high income),SSA,58.55747868
 South Sudan,SSD,55.68221951
-Sub-Saharan Africa,SSF,58.55885496
-Small states,SST,67.83853586
 Sao Tome and Principe,STP,66.38460976
 Suriname,SUR,71.15143902
 Slovak Republic,SVK,76.71463415
@@ -226,18 +194,12 @@ Seychelles,SYC,73.22926829
 Syrian Arab Republic,SYR,70.07102439
 Turks and Caicos Islands,TCA,
 Chad,TCD,51.55580488
-East Asia & Pacific (IDA & IBRD countries),TEA,74.034774
-Europe & Central Asia (IDA & IBRD countries),TEC,72.39720521
 Togo,TGO,59.65580488
 Thailand,THA,74.42202439
 Tajikistan,TJK,69.59797561
 Turkmenistan,TKM,65.59853659
-Latin America & the Caribbean (IDA & IBRD countries),TLA,74.83097562
-Middle East & North Africa (IDA & IBRD countries),TMN,72.2596293
 Timor-Leste,TLS,68.25914634
 Tonga,TON,72.79219512
-South Asia (IDA & IBRD),TSA,68.1210446
-Sub-Saharan Africa (IDA & IBRD countries),TSS,58.55885496
 Trinidad and Tobago,TTO,70.44056098
 Tunisia,TUN,74.14390244
 Turkey,TUR,75.1635122
@@ -245,7 +207,6 @@ Tuvalu,TUV,
 Tanzania,TZA,64.94390244
 Uganda,UGA,58.46641463
 Ukraine,UKR,71.18658537
-Upper middle income,UMC,74.43883867
 Uruguay,URY,76.98614634
 United States,USA,78.94146341
 Uzbekistan,UZB,68.33902439
@@ -256,7 +217,6 @@ Virgin Islands (U.S.),VIR,79.77317073
 Vietnam,VNM,75.62912195
 Vanuatu,VUT,71.91831707
 West Bank and Gaza,PSE,72.90402439
-World,WLD,71.45499816
 Samoa,WSM,73.51182927
 "Yemen, Rep.",YEM,63.81819512
 South Africa,ZAF,57.18212195

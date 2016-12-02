@@ -1,28 +1,79 @@
+// Swip Draijer
+// 10192239
+// Data Processing
+// Creates D3 map of life expectancy data
+
 var life = {};
-var bins = ['50', '50-55', '55-60', '60-65', '60-65', '65-70', '70-75', '75-80', '80-85', '80']
+var years = [];
+var minimum;
+var maximum;
+var avg;
+
+// Creates array of colors from ColorBrewer (http://colorbrewer2.org/#type=sequential&scheme=Blues&n=9)
+var colorbrewer = ['#f7fbff','#deebf7','#c6dbef','#9ecae1','#6baed6','#4292c6','#2171b5','#08519c','#08306b']
+
+// Formats number to two decimals
 var formatNumber = d3.format('.2f');
 
-d3.csv("lifeexpectancy.csv", function(data) {
+// Reads data from csv
+d3.csv("life_expectancy.csv", function(data) {
   
   data.forEach(function(d) {
 
+    // Creates array of life expectancy value
+    for (var i = 0; i <= data.length; i++)
+    {
+      if (d.years > 0) {
+        years.push(+d.years)
+      }
+    }
+  
+  });  
+  
+  // Extracts minimum and maximum values from array and computes interval size based on this range
+  minimum = Math.min.apply(null, years)
+  maximum = Math.max.apply(null, years)
+  bins_interval = (maximum - minimum) / colorbrewer.length
+
+  // Creates bins based on minimum and interval and converts to string to use as fillkey
+  var bins = []
+  for (i = 0; i < colorbrewer.length; i++) {
+      bins.push(formatNumber((minimum + bins_interval * i)).toString())
+  }
+
+  // Computes average value
+  var total = 0;
+  for (var i = 0; i < years.length; i++) {
+      total += years[i];
+  }
+  avg = total / years.length;
+
+  // Assigns each country a fillkey and a numerical life expectancy
+  data.forEach(function(d) {
+
+    // Computes fillkey and rounds down to bin integers
+    var key = Math.floor((d.years - minimum) / bins_interval)
+    if (key > 8) {
+      key = 8
+    }
+
     life[d.code] = { 
-         fillKey: bins[Math.floor((d.years - 48) / 5)],
-         years: +formatNumber(d.years),
+      fillKey: bins[key],
+      years: +formatNumber(d.years),
     }
 
   });
 
-  console.log(life);
-  // console.log(Math.min(data.years))       
-  // console.log(Math.min.apply(null, data.years))
-  // Math.min(...numbers)
-
-// d3.format(",.2f")
-  var colorbrewer = ['#fff7fb','#ece7f2','#d0d1e6','#a6bddb','#74a9cf','#3690c0','#0570b0','#034e7b']
+  // Creates key-value pairs for bins and colors
+  var legend = {};
   
+  for (var i = 0; i <= bins.length; i++)
+  {
+    legend[bins[i]] = colorbrewer[i];    
+  }
+  
+  // Creats D3 map
   var map = new Datamap({
-        
         element: document.getElementById('container'),
         geographyConfig: {
             highlightOnHover: true,
@@ -30,32 +81,47 @@ d3.csv("lifeexpectancy.csv", function(data) {
             highlightBorderColor: 'rgba(0,0,0,0.5)',
             popupOnHover: true,
             popupTemplate: function(geo, data) {
-                if (data.years >= 0)
-                {
-                        return ['<div class="hoverinfo"><strong>',
-                                 '' + geo.properties.name + '\n',
-                                 'Life expectancy at birth: ' + data.years + ' years',
-                                '</strong></div>'].join('');
+                if (data) {
+                    
+                    // Selects countries with data (life expectancy is higher than 0)
+                    if (data.years > 0)
+                    {
+                            // Text in green for countries above average, in red for below average
+                            var color = 'green'
+                            if (data.years < avg) { 
+                              color = "red" 
+                            }
+                            return ['<div class="hoverinfo"><strong>' + '' + geo.properties.name + '<br>' +
+                                     'Life expectancy at birth: ' + '<br>' + '<font color=' + color + '>' + 
+                                     data.years + '</font>' + ' years' + '</strong></div>'];
+                    }
                 }
+                return ['<div class="hoverinfo"><strong>' + '' + geo.properties.name + '<br>' 
+                          + 'No data available' + '</strong></div>'];
               }
            },
-        fills: {
-            '50': colorbrewer[0],
-            '50-55': colorbrewer[1],
-            '55-60': colorbrewer[2],
-            '60-65': colorbrewer[3],
-            '65-70': colorbrewer[4],
-            '70-75': colorbrewer[5],
-            '75-80': colorbrewer[6],
-            '85': colorbrewer[7],
-            defaultFill: 'black'
-        },
-       
+        
+        fills: legend,  
         data: life
-   
+    
     });
 
-  map.legend();
+  // Lists average life expectancy in HTML
+  var info = document.getElementById('info')
+  info.innerHTML = 'Average global life expectancy: ' + '<strong>' + formatNumber(avg) + ' years' + '</strong>' + '<br>'
+  
+  // Creates legend (no time to implement looping through list items)
+  var labels = document.getElementById('labels')
+  labels.innerHTML = 
+      '<li><span style=' + 'background:' + 'black' + '></span>' + 'No data available' + '</li>' +
+      '<li><span style=' + 'background:' + colorbrewer[0] + '></span>' + bins[0] + ' - ' + bins[1] + '</li>' +
+      '<li><span style=' + 'background:' + colorbrewer[1] + '></span>' + bins[1] + ' - ' + bins[2] + '</li>' +
+      '<li><span style=' + 'background:' + colorbrewer[2] + '></span>' + bins[2] + ' - ' + bins[3] + '</li>' +
+      '<li><span style=' + 'background:' + colorbrewer[3] + '></span>' + bins[3] + ' - ' + bins[4] + '</li>' +
+      '<li><span style=' + 'background:' + colorbrewer[4] + '></span>' + bins[4] + ' - ' + bins[5] + '</li>' +
+      '<li><span style=' + 'background:' + colorbrewer[5] + '></span>' + bins[5] + ' - ' + bins[6] + '</li>' +
+      '<li><span style=' + 'background:' + colorbrewer[6] + '></span>' + bins[6] + ' - ' + bins[7] + '</li>' +
+      '<li><span style=' + 'background:' + colorbrewer[7] + '></span>' + bins[7] + ' - ' + bins[8] + '</li>' +
+      '<li><span style=' + 'background:' + colorbrewer[8] + '></span>' + '>' + bins[8] + '</li>'
 
 });
-
