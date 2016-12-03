@@ -53,8 +53,8 @@ d3.csv("life_expectancy.csv", function(data) {
 
     // Computes fillkey and rounds down to bin integers
     var key = Math.floor((d.years - minimum) / bins_interval)
-    if (key > 8) {
-      key = 8
+    if (key > (bins.length - 1)) {
+      key = bins.length - 1
     }
 
     life[d.code] = { 
