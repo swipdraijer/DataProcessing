@@ -1,0 +1,25 @@
+/*Swip Draijer
+10192239
+Data Processing
+Prepares data for D3 line*/
+
+body {
+	font-family: "Helvetica Neue", Helvetica;
+}
+
+path {
+	stroke: steelblue;
+	stroke-width: 1;
+	fill: none;
+}
+
+.x.axis path, 
+.y.axis path
+{
+	stroke: orangered;
+}
+
+.focus circle {
+  fill: none;
+  stroke: steelblue;
+}
