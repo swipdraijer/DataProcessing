@@ -13,7 +13,7 @@ csvfile = open(csvfilename, 'r')
 jsonfile = open(jsonfilename, 'w')
 
 # Assigns field names and reads through csv file
-fieldnames = ('station', 'date', 'min', 'max', 'rain')
+fieldnames = ('date', 'avg', 'min', 'max')
 reader = csv.DictReader( csvfile, fieldnames)
 
 # Writes each row to jsonfile

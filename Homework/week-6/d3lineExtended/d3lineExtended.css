@@ -13,16 +13,26 @@ path {
 	fill: none;
 }
 
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
 .focus circle {
   fill: none;
   stroke: steelblue;
 }
 
-.axis path {
-    fill: none;
-    stroke: #777;
-    shape-rendering: crispEdges;
-}
 .axis text {
     font-size: 20px;
 }
+
+  
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
