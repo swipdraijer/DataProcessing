@@ -23,28 +23,28 @@
       <file leaf-file-name="convertCSV2JSON.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/week-6/d3lineExtended/convertCSV2JSON.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="15" column="41" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
+            <state relative-caret-position="85">
+              <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="knmi.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/week-6/d3lineExtended/knmi.json">
+      <file leaf-file-name="knmi_years.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/week-6/d3lineExtended/knmi_years.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3247">
-              <caret line="90" column="65" selection-start-line="90" selection-start-column="65" selection-end-line="90" selection-end-column="65" />
+            <state relative-caret-position="136">
+              <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="KNMI.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/week-5/d3line/KNMI.csv">
+      <file leaf-file-name="knmi2014.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/week-6/d3lineExtended/knmi2014.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -90,8 +90,8 @@
         <option value="$PROJECT_DIR$/week-5/convertCSV2JSON.py" />
         <option value="$PROJECT_DIR$/week-5/d3line/knmi.json" />
         <option value="$PROJECT_DIR$/week-5/d3line/convertCSV2JSON.py" />
-        <option value="$PROJECT_DIR$/week-6/d3lineExtended/convertCSV2JSON.py" />
         <option value="$PROJECT_DIR$/week-6/d3lineExtended/knmi.json" />
+        <option value="$PROJECT_DIR$/week-6/d3lineExtended/convertCSV2JSON.py" />
       </list>
     </option>
   </component>
@@ -545,28 +545,6 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/week-3/SVG2/countries.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/week-3/SVG2/articles.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/week-1/Scraping/tvscraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="39" column="24" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/week-3/SVG2/foreign.py" />
-    <entry file="file://$PROJECT_DIR$/week-3/SVG2/countries.js">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
@@ -829,18 +807,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/week-6/d3lineExtended/convertCSV2JSON.py">
+    <entry file="file://$PROJECT_DIR$/week-6/d3lineExtended/knmi.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="15" column="41" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
+        <state relative-caret-position="-1318">
+          <caret line="0" column="1" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/week-6/d3lineExtended/knmi.json">
+    <entry file="file://$PROJECT_DIR$/week-6/d3lineExtended/KNMI.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3247">
-          <caret line="90" column="65" selection-start-line="90" selection-start-column="65" selection-end-line="90" selection-end-column="65" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/week-6/d3lineExtended/knmi stations.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/week-6/d3lineExtended/knmi2014.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/week-6/d3lineExtended/convertCSV2JSON.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/week-6/d3lineExtended/knmi_years.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
           <folding />
         </state>
       </provider>

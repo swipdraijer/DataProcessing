@@ -5,34 +5,42 @@ Prepares data for D3 line*/
 
 body {
 	font-family: "Helvetica Neue", Helvetica;
+	font-size: 22px;
 }
 
-path {
-	stroke: steelblue;
-	stroke-width: 1;
-	fill: none;
-}
-
-.axis path,
-.axis line {
-    fill: none;
-    stroke: grey;
-    stroke-width: 1;
-    shape-rendering: crispEdges;
+.title {
+	font-size: 30px;
+	text-decoration: underline;
 }
 
 .focus circle {
   fill: none;
-  stroke: steelblue;
+  stroke: orangered;
 }
 
-.axis text {
-    font-size: 20px;
+.line_min {
+  fill: none;
+  stroke: blue;
+  stroke-width: 2px;
+}
+.line_max {
+	fill: none;
+	stroke: green;
+	stroke-width: 2px;
+}
+.line_avg {
+	fill: none;
+	stroke: orangered;
+	stroke-width: 2px;
+	stroke-dasharray: 3, 2
 }
 
-  
-    .line {
-      fill: none;
-      stroke: steelblue;
-      stroke-width: 1.5px;
-    }
+.dateholder {
+	font-weight: bold;
+}
+
+#inds{
+	position: fixed;
+    bottom: 100;
+    right: 100;
+}
