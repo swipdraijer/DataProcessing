@@ -40,7 +40,5 @@ body {
 }
 
 #inds{
-	position: fixed;
-    bottom: 100;
-    right: 100;
+	position: static;
 }

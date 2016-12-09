@@ -9,7 +9,7 @@ var height_outer = 600
 
 var margin = {
         top: 50,
-        right: 40,
+        right: 180,
         bottom: 100,
         left: 100
       },
@@ -62,18 +62,12 @@ var knmi2014,
   knmi2015,
   knmi2016;
 
-// Read data from json
-// d3.json("knmi2016.json", function(data) {
-
-
 // Queue data for quick loading
 queue()
   .defer(d3.json, 'knmi2014.json')
   .defer(d3.json, 'knmi2015.json')
   .defer(d3.json, 'knmi2016.json')
   .await(load);
-
-  // drawGraph(knmi2016)
 
 function prepare(data) {
 
@@ -132,7 +126,7 @@ function drawGraph (data) {
 	.append("text")
 		.attr("fill", "#000")
 		.attr("transform", "rotate(0)")
-		.attr("x", width_inner - margin.right)
+		.attr("x", width_inner)
 		.attr("dy", "3.5em")
 		.style("text-anchor", "end")
 		.text("Date (month)")
