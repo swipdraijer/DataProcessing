@@ -5,8 +5,8 @@
 
 // Format date
 var formatDate = d3.time.format("%Y%m%d").parse,
-bisectDate = d3.bisector(function(d) { return d.date; }).left,
-formatTime = d3.time.format("%d %B");
+  bisectDate = d3.bisector(function(d) { return d.date; }).left,
+  formatTime = d3.time.format("%d %B");
 
 // Select station as data source
 var station = []
@@ -65,12 +65,11 @@ d3.json("knmi.json", function(data) {
 
 		d.date = formatDate(d.date)
 		d.max = +d.max / 10
-		// d.rain = +d.rain
-		// d.min = +d.min
 		return d;
 	
    	});
 
+  // Add title 
 	svg.append("text")
 		.attr("x", width_inner / 2)
 		.attr("y", margin.top)
@@ -79,9 +78,10 @@ d3.json("knmi.json", function(data) {
         .style("text-decoration", "underline")  
         .text("Daily Max Temperatures 2016, Schiphol");
 
-  	x.domain(d3.extent(station, function(d) { return d.date; }))
-  	y.domain([0, d3.max(station, function(d) { return d.max; })])
-	
+  // Define domains
+	x.domain(d3.extent(station, function(d) { return d.date; }))
+	y.domain([0, d3.max(station, function(d) { return d.max; })])
+
  	// Creates x axis
 	svg.append("g")
 	  .attr("class", "x axis")
@@ -106,14 +106,15 @@ d3.json("knmi.json", function(data) {
       .style("text-anchor", "end")
       .text("Temperature (°C)");
 
-    // Creates line
-    svg.append("path")
-	    .attr("class", "line")
-	    .attr("d", line(station));
+  // Creates line
+  svg.append("path")
+    .attr("class", "line")
+    .attr("d", line(station));
 
-  	  var focus = svg.append("g")
-      .attr("class", "focus")
-      .style("display", "none");
+  // Creates focus
+  var focus = svg.append("g")
+  .attr("class", "focus")
+  .style("display", "none");
 
   focus.append("circle")
       .attr("r", 4.5);
@@ -132,6 +133,7 @@ d3.json("knmi.json", function(data) {
       .on("mouseout", function() { focus.style("display", "none"); })
       .on("mousemove", mousemove);
 
+  // Shows values based on mouse position
   function mousemove() {
     var x0 = x.invert(d3.mouse(this)[0]),
         i = bisectDate(station, x0, 1),
@@ -143,5 +145,4 @@ d3.json("knmi.json", function(data) {
     	.text(formatTime(new Date(d.date)) + ": " + d.max + "°C");
  	}
     
-
 });
