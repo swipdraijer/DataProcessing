@@ -106,10 +106,10 @@ d3.csv("life_expectancy.csv", function(data) {
            map.svg.selectAll('.datamaps-subunit').on('mouseover', function(geo, data, life) { 
                 console.log(geo.properties.name) 
 
-                           
+          
             // Create scatterplot
             svg.selectAll(".title").remove();      
-            scatterplot(geo.properties.name)
+            updateScatterplot(geo.properties.name)
              }); 
 
              map.svg.selectAll('.datamaps-subunit').on("mouseout", function(geo, data, life) { 
@@ -145,15 +145,6 @@ d3.csv("life_expectancy.csv", function(data) {
       '<li><span style=' + 'background:' + colorbrewer[8] + '></span>' + '>' + bins[8] + '</li>'
 
 });
-
-var data_year = 2014;
-
-function showValue(newValue)
-{
-  document.getElementById("range").innerHTML=newValue;
-  data_year = newValue
-  console.log(data_year);
-}
 
 // Define margins
 var width_outer = 1200
@@ -198,37 +189,50 @@ var yValue = function(d) { return d.GDP;},
     yMap = function(d) { return yScale(yValue(d));}, 
     yAxis = d3.svg.axis().scale(yScale).orient("left");
 
-// // add the graph canvas to the body of the webpage
-// var svg = d3.select("body").append("svg")
-//     .attr("width", width_outer)
-//     .attr("height", height_outer)
-//   .append("g")
-//     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+// setup fill color
+var cValue = function(selection, country) {
+      if (selection == "China") {
+        return "orangered";    
+      }
+      else {
+        return "steelblue";
+      }
+
+    }
 
 // add the tooltip area to the webpage
 var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-function scatterplot (country) {
-
-// Update title 
 svg.append("text")
-  .attr("class", "title")
-  .attr("x", width_inner / 2)
-  .attr("y", margin.top)
-  .attr("text-anchor", "middle")
-      .text("Life expectancy and GDP per capita in " + country);
+.attr("class", "title")
+.attr("x", width_inner / 2)
+.attr("y", margin.top)
+.attr("text-anchor", "middle")
+    .text("Life expectancy and GDP per capita by country " + " (" + data_year + ")");
 
-// setup fill color
-var selectionColor = function(d) { 
-    if (d.country == country) {
-      return "orangered";    
-    }
-    else {
-      return "steelblue";
-    }
+var data_year = 2014;
+var dataset = "life_expectancy_GDP_2014.csv"; 
+
+makePlot(dataset)
+
+function showValue(newValue)
+{
+  document.getElementById("range").innerHTML=newValue;
+  data_year = newValue
+  console.log(data_year);
+
+if (data_year == 2014) {
+  dataset = "life_expectancy_GDP_2014.csv"
 }
+else 
+{
+  dataset = "life_expectancy_GDP_2013.csv"
+}
+
+svg.selectAll("*").remove();     
+makeScatter(dataset)
 
 }
 
@@ -236,13 +240,13 @@ var selectionColor = function(d) {
 queue()
   .defer(d3.csv, 'life_expectancy_GDP_2013.csv')
   .defer(d3.csv, 'life_expectancy_GDP_2014.csv')
-  .defer(d3.csv, 'knmi2016.json')
   .await(load);
 
-function prepare(data) {
+function test () {
+  console.log("ready when you are!")
+}
 
-// load data
-d3.csv("life_expectancy_GDP_2014.csv", function(error, data) {
+function prepare(data) {
 
   // change string (from CSV) into number format
   data.forEach(function(d) {
@@ -250,16 +254,37 @@ d3.csv("life_expectancy_GDP_2014.csv", function(error, data) {
     d.GDP = +d.GDP;
   });
 
-  // don't want dots overlapping axis, so add in buffer to data domain
+  return d;
+
+};
+
+function load(error, life_expectancy_GDP_2013, life_expectancy_GDP_2014) {
+  
+  if(error) { console.log(error); }
+
+  prepare(life_expectancy_GDP_2013)
+  prepare(life_expectancy_GDP_2014)
+  
+  var year = "2014"
+  makeScatter(life_expectancy_GDP_2014)
+
+}
+
+var d;
+
+function makePlot (dataset) {
+
+// load data
+d3.csv(dataset, function(error, data) {
+
+  // change string (from CSV) into number format
+  data.forEach(function(d) {
+    d.life = +d.life;
+    d.GDP = +d.GDP;
+  });
+
   xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
   yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
-
-  svg.append("text")
-  .attr("class", "title")
-  .attr("x", width_inner / 2)
-  .attr("y", margin.top)
-  .attr("text-anchor", "middle")
-      .text("Life expectancy and GDP per capita by country");
 
   // x-axis
   svg.append("g")
@@ -284,7 +309,7 @@ d3.csv("life_expectancy_GDP_2014.csv", function(error, data) {
       .attr("dy", ".71em")
       .style("text-anchor", "end")
       .text("GDP per capita ($)");
-
+    
   // draw dots
   svg.selectAll(".dot")
       .data(data)
@@ -293,9 +318,10 @@ d3.csv("life_expectancy_GDP_2014.csv", function(error, data) {
       .attr("r", 5)
       .attr("cx", xMap)
       .attr("cy", yMap)
-      // .style("fill", function(d) { return colour(d.country);}) 
-
       .style("fill", "steelblue") 
+      .style("fill", function(d) { return cValue("CHN", d.country);}) 
+    
+  svg.selectAll(".dot")
       .on("mouseover", function(d) {
           tooltip.transition()
                .duration(100)
@@ -309,7 +335,115 @@ d3.csv("life_expectancy_GDP_2014.csv", function(error, data) {
           tooltip.transition()
                .duration(500)
                .style("opacity", 0);
+
+          
       });
  
 
 });
+
+}
+
+function updateScatterplot (country, d) {
+
+// Update title 
+svg.append("text")
+  .attr("class", "title")
+  .attr("x", width_inner / 2)
+  .attr("y", margin.top)
+  .attr("text-anchor", "middle")
+      .text("Life expectancy and GDP per capita in " + country + " (" + data_year + ")");
+
+console.log(country)
+
+// if (d.country == country) {
+//       return "orangered";    
+//     }
+//     else {
+//       return "steelblue";
+//     }
+
+}
+
+// function makeScatter (data) {
+
+//   // // Remove graph
+//   // d3.selectAll("svg").remove();
+
+//   xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
+//   yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
+
+//   // x-axis
+//   svg.append("g")
+//       .attr("class", "x axis")
+//       .attr("transform", "translate(0," + height_inner + ")")
+//       .call(xAxis)
+//     .append("text")
+//       .attr("class", "label")
+//       .attr("x", width_inner)
+//       .attr("y", margin.bottom)
+//       .style("text-anchor", "end")
+//       .text("Life expectancy at birth (years)");
+
+//   // y-axis
+//   svg.append("g")
+//       .attr("class", "y axis")
+//       .call(yAxis)
+//     .append("text")
+//       .attr("class", "label")
+//       .attr("transform", "rotate(-90)")
+//       .attr("y", -margin.left)
+//       .attr("dy", ".71em")
+//       .style("text-anchor", "end")
+//       .text("GDP per capita ($)");
+    
+//   // draw dots
+//   svg.selectAll(".dot")
+//       .data(data)
+//     .enter().append("circle")
+//       .attr("class", "dot")
+//       .attr("r", 5)
+//       .attr("cx", xMap)
+//       .attr("cy", yMap)
+//       .style("fill", "steelblue") 
+//       .style("fill", function(d) { return cValue("CHN", d.country);}) 
+    
+//   svg.selectAll(".dot")
+//       .on("mouseover", function(d) {
+//           tooltip.transition()
+//                .duration(100)
+//                .style("opacity", .9);
+//           tooltip.html(d.country + "<br/>" + "Life expectancy (years): " + formatNumber(xValue(d)) 
+//           + ", " + "GDP per capita: " + "$" + formatNumber(yValue(d)))
+//                .style("left", (d3.event.pageX + 5) + "px")
+//                .style("top", (d3.event.pageY - 28) + "px");
+//       })
+//       .on("mouseout", function(d) {
+//           tooltip.transition()
+//                .duration(500)
+//                .style("opacity", 0);
+
+          
+//       });
+ 
+// d3.select('#range')
+//   .on("change", function () {
+
+//   var selection = document.getElementById("range");
+//   year = selection.options[selection.selectedIndex].value;
+  
+//   console.log("test");
+
+    // if (year == 2014) {
+    //   drawGraph(knmi2014)
+    // }
+    // else if (year == 2015) {
+    //   drawGraph(knmi2015);
+    // }
+    // else if (year == 2016) {
+    //   drawGraph(knmi2016);
+    // }
+
+  // });
+
+// };
