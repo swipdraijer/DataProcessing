@@ -11,7 +11,7 @@
 
 		/* Sets properties for title */
 		h1 {
-		    color: orangered;
+		    color: DarkGreen;
 		    font-size: 200%;
 		    text-align: left;
 		}
@@ -23,11 +23,11 @@
 
 		/* Sets properties for bars */
 		.bar {
-		  fill: steelblue;
+		  fill: red;
 		}
 
 		.bar:hover {
-		  fill: orangered;
+		  fill: darkgreen;
 		}
 
 		/* Sets properties for text in axes */
