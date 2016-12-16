@@ -1,7 +1,7 @@
 // Swip Draijer
 // 10192239
 // Data Processing
-// Creates D3 map of life expectancy data
+// Creates Linked View for Life Expectancy Data and GDP per capita
 
 var life = {};
 var years = [];
@@ -71,11 +71,10 @@ d3.csv("life_expectancy.csv", function(data) {
   {
     legend[bins[i]] = colorbrewer[i];    
   }
-  
+
   // Creates D3 map
   var map = new Datamap({
         element: document.getElementById('container'),
-        responsive: true,
         geographyConfig: {
             highlightOnHover: true,
             borderColor: 'rgba(255,255,255,0.3)',
@@ -103,28 +102,19 @@ d3.csv("life_expectancy.csv", function(data) {
            },
            done: function(map) {
       
-           map.svg.selectAll('.datamaps-subunit').on('mouseover', function(geo, data, life) { 
-                console.log(geo.properties.name) 
-
-          
-            // Create scatterplot
-            svg.selectAll(".title").remove();      
-            updateScatterplot(geo.properties.name)
-             }); 
-
-             map.svg.selectAll('.datamaps-subunit').on("mouseout", function(geo, data, life) { 
-            console.log("out")  
-
-         
-          
-        });
-
-        },
+               map.svg.selectAll('.datamaps-subunit').on('click', function(geo, data, life) { 
+                               
+                // Create scatterplot
+                svg.selectAll(".title").remove();      
+                updateScatterplot(geo.properties.name, geo.id)
+              
+              });
+            },
         
-        fills: legend,  
-        data: life
+      fills: legend,  
+      data: life
     
-    });
+  });
 
   // Lists average life expectancy in HTML
   var info = document.getElementById('info')
@@ -133,7 +123,7 @@ d3.csv("life_expectancy.csv", function(data) {
   // Creates legend
   var labels = document.getElementById('labels')
   labels.innerHTML = 
-      '<li><span style=' + 'background:' + 'black' + '></span>' + 'No data available' + '</li>' +
+      '<li><span style=' + 'background:' + 'black' + '></span>' + 'No data available in 2014' + '</li>' +
       '<li><span style=' + 'background:' + colorbrewer[0] + '></span>' + bins[0] + ' - ' + bins[1] + '</li>' +
       '<li><span style=' + 'background:' + colorbrewer[1] + '></span>' + bins[1] + ' - ' + bins[2] + '</li>' +
       '<li><span style=' + 'background:' + colorbrewer[2] + '></span>' + bins[2] + ' - ' + bins[3] + '</li>' +
@@ -146,21 +136,25 @@ d3.csv("life_expectancy.csv", function(data) {
 
 });
 
-// Define margins
-var width_outer = 1200
-var height_outer = 600
-var margin = {top: 10, right: 60, bottom: 80, left: 120},
+// Initializes data for scatterplot
+var data_year = 2014;
+var dataset = "life_expectancy_GDP_2014.csv"; 
+
+// Defines margins
+var width_outer = 900
+var height_outer = 400
+var margin = {top: 60, right: 30, bottom: 30, left: 120},
     width_inner = width_outer - margin.left - margin.right,
     height_inner = height_outer - margin.top - margin.bottom;
 
+// Initializes scales
 var x0 = d3.scale.ordinal()
     .rangeRoundBands([0, width_inner], .1);
-
-var x1 = d3.scale.ordinal();
 
 var y = d3.scale.linear()
     .range([height_inner, 0]);
 
+// Initializes axes
 var xAxis = d3.svg.axis()
     .scale(x0)
     .orient("bottom");
@@ -170,6 +164,7 @@ var yAxis = d3.svg.axis()
     .orient("left")
     .tickFormat(d3.format(".2s"));
 
+// Initializes svg for scatterplot
 var svg = d3.select("body").append("svg")
     .attr("class", "svg")
     .attr("width", width_outer + margin.left + margin.right)
@@ -177,273 +172,175 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-// setup x 
+// Defines x values
 var xValue = function(d) { return d.life;}, 
     xScale = d3.scale.linear().range([0, width_inner]),
     xMap = function(d) { return xScale(xValue(d));}, 
     xAxis = d3.svg.axis().scale(xScale).orient("bottom");
 
-// setup y
+// Defines y values
 var yValue = function(d) { return d.GDP;},
     yScale = d3.scale.linear().range([height_inner, 0]), 
     yMap = function(d) { return yScale(yValue(d));}, 
     yAxis = d3.svg.axis().scale(yScale).orient("left");
 
-// setup fill color
-var cValue = function(selection, country) {
-      if (selection == "China") {
-        return "orangered";    
-      }
-      else {
-        return "steelblue";
-      }
-
-    }
-
-// add the tooltip area to the webpage
-var tooltip = d3.select("body").append("div")
+// Adds tooltip
+var tooltip = d3.select("#tooltip").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-svg.append("text")
-.attr("class", "title")
-.attr("x", width_inner / 2)
-.attr("y", margin.top)
-.attr("text-anchor", "middle")
-    .text("Life expectancy and GDP per capita by country " + " (" + data_year + ")");
-
-var data_year = 2014;
-var dataset = "life_expectancy_GDP_2014.csv"; 
-
+// Creates initial scatterplot
 makePlot(dataset)
 
-function showValue(newValue)
+// Selects data for selected year
+function updateYear(newYear)
 {
-  document.getElementById("range").innerHTML=newValue;
-  data_year = newValue
+  document.getElementById("range").innerHTML=newYear;
+  data_year = newYear
   console.log(data_year);
 
-if (data_year == 2014) {
-  dataset = "life_expectancy_GDP_2014.csv"
-}
-else 
-{
-  dataset = "life_expectancy_GDP_2013.csv"
-}
+  dataset = "life_expectancy_GDP_" + data_year + ".csv"
+  console.log(dataset)
 
-svg.selectAll("*").remove();     
-makeScatter(dataset)
+  // Removes previous plot and creates new plot
+  svg.selectAll("*").remove();     
+  makePlot(dataset)
 
 }
 
-// Queue data for quick loading
-queue()
-  .defer(d3.csv, 'life_expectancy_GDP_2013.csv')
-  .defer(d3.csv, 'life_expectancy_GDP_2014.csv')
-  .await(load);
+// Sets data as global variable
+var data;
 
-function test () {
-  console.log("ready when you are!")
-}
-
-function prepare(data) {
-
-  // change string (from CSV) into number format
-  data.forEach(function(d) {
-    d.life = +d.life;
-    d.GDP = +d.GDP;
-  });
-
-  return d;
-
-};
-
-function load(error, life_expectancy_GDP_2013, life_expectancy_GDP_2014) {
-  
-  if(error) { console.log(error); }
-
-  prepare(life_expectancy_GDP_2013)
-  prepare(life_expectancy_GDP_2014)
-  
-  var year = "2014"
-  makeScatter(life_expectancy_GDP_2014)
-
-}
-
-var d;
-
+// Creates scatterplot using selected dataset
 function makePlot (dataset) {
 
-// load data
-d3.csv(dataset, function(error, data) {
+  // Appends title
+  svg.append("text")
+    .attr("class", "title")
+    .attr("x", width_inner / 2)
+    .attr("y", margin.top / 4)
+    .attr("text-anchor", "middle")
+      .text("Life expectancy and GDP per capita by country " + " (" + data_year + ")");
 
-  // change string (from CSV) into number format
-  data.forEach(function(d) {
-    d.life = +d.life;
-    d.GDP = +d.GDP;
+  // Loads data
+  d3.csv(dataset, function(error, data) {
+
+    data.forEach(function(d) {
+      d.life = +d.life;
+      d.GDP = +d.GDP;
+    });
+
+    // Defines x and y domains
+    xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
+    yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
+
+    // Creates x axis
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height_inner + ")")
+        .call(xAxis)
+      .append("text")
+        .attr("class", "label")
+        .attr("x", width_inner)
+        .attr("y", margin.bottom + 20)
+        .style("text-anchor", "end")
+        .text("Life expectancy at birth (years)");
+
+    // Creates y axis
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+      .append("text")
+        .attr("class", "label")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -margin.left)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("GDP per capita ($)");
+    
+    // Draws dots
+    svg.selectAll(".dot")
+        .data(data)
+      .enter().append("circle")
+        .attr("class", "dot")
+        .attr("id", function(d) { return d.code }) 
+        .attr("r", 4.5)
+        .attr("cx", xMap)
+        .attr("cy", yMap)
+        .style("fill", "steelblue") 
+    
+    // Adds tooltip to dot 
+    svg.selectAll(".dot")
+        .on("mouseover", function(d) {
+            tooltip.transition()
+                 .duration(100)
+                 .style("opacity", .9);
+            tooltip.html(d.country + "<br/>" + "Life expectancy (years): " + formatNumber(xValue(d)) 
+            + "<br/>" + "GDP per capita: " + "$ " + formatNumber(yValue(d)))
+        })
+        .on("mouseout", function(d) {
+            tooltip.transition()
+                 .duration(500)
+                 .style("opacity", 0);
+    });
+ 
   });
-
-  xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
-  yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
-
-  // x-axis
-  svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height_inner + ")")
-      .call(xAxis)
-    .append("text")
-      .attr("class", "label")
-      .attr("x", width_inner)
-      .attr("y", margin.bottom)
-      .style("text-anchor", "end")
-      .text("Life expectancy at birth (years)");
-
-  // y-axis
-  svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis)
-    .append("text")
-      .attr("class", "label")
-      .attr("transform", "rotate(-90)")
-      .attr("y", -margin.left)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("GDP per capita ($)");
     
-  // draw dots
-  svg.selectAll(".dot")
-      .data(data)
-    .enter().append("circle")
-      .attr("class", "dot")
-      .attr("r", 5)
-      .attr("cx", xMap)
-      .attr("cy", yMap)
-      .style("fill", "steelblue") 
-      .style("fill", function(d) { return cValue("CHN", d.country);}) 
-    
-  svg.selectAll(".dot")
-      .on("mouseover", function(d) {
-          tooltip.transition()
-               .duration(100)
-               .style("opacity", .9);
-          tooltip.html(d.country + "<br/>" + "Life expectancy (years): " + formatNumber(xValue(d)) 
-          + ", " + "GDP per capita: " + "$" + formatNumber(yValue(d)))
-               .style("left", (d3.event.pageX + 5) + "px")
-               .style("top", (d3.event.pageY - 28) + "px");
-      })
-      .on("mouseout", function(d) {
-          tooltip.transition()
-               .duration(500)
-               .style("opacity", 0);
-
-          
-      });
- 
-
-});
-
 }
 
-function updateScatterplot (country, d) {
+// Updates scatterplot for selected country
+function updateScatterplot (country, geo, selected_geo) {
 
-// Update title 
-svg.append("text")
-  .attr("class", "title")
-  .attr("x", width_inner / 2)
-  .attr("y", margin.top)
-  .attr("text-anchor", "middle")
-      .text("Life expectancy and GDP per capita in " + country + " (" + data_year + ")");
+  // Updates title 
+  svg.append("text")
+    .attr("class", "title")
+    .attr("x", width_inner / 2)
+    .attr("y", margin.top / 4)
+    .attr("text-anchor", "middle")
+        .text("Life expectancy and GDP per capita " + "(" + country + ", " + data_year + ")");
 
-console.log(country)
-
-// if (d.country == country) {
-//       return "orangered";    
-//     }
-//     else {
-//       return "steelblue";
-//     }
-
-}
-
-// function makeScatter (data) {
-
-//   // // Remove graph
-//   // d3.selectAll("svg").remove();
-
-//   xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
-//   yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
-
-//   // x-axis
-//   svg.append("g")
-//       .attr("class", "x axis")
-//       .attr("transform", "translate(0," + height_inner + ")")
-//       .call(xAxis)
-//     .append("text")
-//       .attr("class", "label")
-//       .attr("x", width_inner)
-//       .attr("y", margin.bottom)
-//       .style("text-anchor", "end")
-//       .text("Life expectancy at birth (years)");
-
-//   // y-axis
-//   svg.append("g")
-//       .attr("class", "y axis")
-//       .call(yAxis)
-//     .append("text")
-//       .attr("class", "label")
-//       .attr("transform", "rotate(-90)")
-//       .attr("y", -margin.left)
-//       .attr("dy", ".71em")
-//       .style("text-anchor", "end")
-//       .text("GDP per capita ($)");
-    
-//   // draw dots
-//   svg.selectAll(".dot")
-//       .data(data)
-//     .enter().append("circle")
-//       .attr("class", "dot")
-//       .attr("r", 5)
-//       .attr("cx", xMap)
-//       .attr("cy", yMap)
-//       .style("fill", "steelblue") 
-//       .style("fill", function(d) { return cValue("CHN", d.country);}) 
-    
-//   svg.selectAll(".dot")
-//       .on("mouseover", function(d) {
-//           tooltip.transition()
-//                .duration(100)
-//                .style("opacity", .9);
-//           tooltip.html(d.country + "<br/>" + "Life expectancy (years): " + formatNumber(xValue(d)) 
-//           + ", " + "GDP per capita: " + "$" + formatNumber(yValue(d)))
-//                .style("left", (d3.event.pageX + 5) + "px")
-//                .style("top", (d3.event.pageY - 28) + "px");
-//       })
-//       .on("mouseout", function(d) {
-//           tooltip.transition()
-//                .duration(500)
-//                .style("opacity", 0);
-
-          
-//       });
- 
-// d3.select('#range')
-//   .on("change", function () {
-
-//   var selection = document.getElementById("range");
-//   year = selection.options[selection.selectedIndex].value;
+  // Reverts colour, size and opacity back to standard
+  d3.selectAll('.dot')
+  .style('fill', 'steelblue')
+  .attr('r', 4.5) 
   
-//   console.log("test");
+  // Checks country for valid geo code
+  if (geo != -99) {
 
-    // if (year == 2014) {
-    //   drawGraph(knmi2014)
-    // }
-    // else if (year == 2015) {
-    //   drawGraph(knmi2015);
-    // }
-    // else if (year == 2016) {
-    //   drawGraph(knmi2016);
-    // }
+    // Highlights selected country
+    d3.selectAll('.dot')
+    .style("opacity", 0.5);
 
-  // });
+    d3.select('#' + geo)
+    .style('fill', 'orange')
+    .style("opacity", 1)
+    .attr('r', 6);
 
-// };
+    selected_geo = d3.select('#' + geo)
+    if (selected_geo.empty() == true) { 
+
+      unavailable(country)
+
+    }
+
+  }
+  else {
+    
+    unavailable(country)
+
+  }
+
+
+}
+
+// Indicates that data is unavailable for selected country 
+function unavailable (country) {
+
+  svg.selectAll(".title").remove();    
+    svg.append("text")
+      .attr("class", "title")
+      .attr("x", width_inner / 2)
+      .attr("y", margin.top / 4)
+      .attr("text-anchor", "middle")
+        .text("No data available for " + country);
+}

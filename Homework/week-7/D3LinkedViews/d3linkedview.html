@@ -1,45 +1,46 @@
 <!-- Swip Draijer -->
 <!-- 10192239 -->
 <!-- Data Processing -->
-<!-- D3 map of global life expectancy data -->
+<!-- D3 Linked View of Global Life Expectancy Data and GDP per capita -->
 
 <!DOCTYPE html>
   <head>
-  	<title> Life Expectancy </title>
+  	<title> Life Expectancy and GDP </title>
   	<link rel="shortcut icon" type="image/png" href="http://aux.iconpedia.net/uploads/19231319111144971816.png"/>
   	<script src="d3.min.js" charset="utf-8"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
     <script src="http://datamaps.github.io/scripts/0.4.4/datamaps.world.min.js"></script>
     <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
- <!--    <script src="jquery-3.1.1.min.js"></script>
-	<script src="rangeslider.min.js"></script> -->
-	<script src="http://d3js.org/queue.v1.min.js"></script>
-
+  	<script src="http://d3js.org/queue.v1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="d3linkedview.css">
   </head>
   <body>
-    <h1> Global life expectancy at birth in 2014 </h1>
-    <p> Data: <a href = http://data.worldbank.org/indicator/SP.DYN.LE00.IN> World Bank</a> 
-    Colors: <a href = http://colorbrewer2.org/#type=sequential&scheme=Blues&n=9> ColorBrewer</a>
-    Author: Swip Draijer </p>
-
-    <div id="info"></div>
+    <h1> Life expectancy and GDP per capita: <br> A story of how the rich live longer than the poor </br></h1>
+    <p> Life expectancy: <a href = http://data.worldbank.org/indicator/SP.DYN.LE00.IN> World Bank </a> <br> Gross Domestic Product (GDP) per capita <a href = http://data.worldbank.org/indicator/SP.DYN.LE00.IN> World Bank </a></br> Colors: <a href = http://colorbrewer2.org/#type=sequential&scheme=Blues&n=9> ColorBrewer</a> Author: Swip Draijer </p>
+   
     <p> Lower life expectancy than global average in <strong><font color=red> red </font></strong>
     <br> Higher life expectancy than global average in <strong><font color=green> green </font></strong><br></p> 
-  
+    <div id="info"></div>
     <div class='my-legend'>
-      <div class='legend-title'><p><b>Life expectancy at birth (years)</b></p></div>
+      <div class='legend-title'><p><b>Life expectancy at birth (years) in 2014 </b></p></div>
       <div class='legend-scale'>
         <ul class='legend-labels'>
           <div id = 'labels'>
         </ul>
+      </div> 
     </div>
-     	<div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
-	   	<script src="d3linkedview.js"></script> 
-	   	<input type="range" min="2013" max="2014" value="2014" step="1" onchange="showValue(this.value)" />
-		<span id="range">2014</span>
-		<script type="text/javascript"></script>
-	
-	
-    </body>
-  </html>
+    
+    <div id="container" style="width: 800px; height: 600px;"></div>
+    <div id="tooltip"></div>
+  
+		<script src="d3linkedview.js"></script> 
+    
+    <p> Select year </p>
+    <input type="range" min="1960" max="2014" value="2014" step="10" onchange="updateYear(this.value)" />
+    <span id="range">2014</span>
+
+    <h2> Life expectancy and GDP </h2>
+    <h3>Whilst scrolling through the years, it becomes clear that GDP per capita has always been correlated with life expectancy. Global life expectancy has increased and so did worldwide GDP per capita. However, some countries are an exception to this rule, such as <a href = https://en.wikipedia.org/wiki/Kuwait#Economy>Kuwait</a> with a relatively high GDP per capita but a low average life expectancy and <a href = https://en.wikipedia.org/wiki/Albania#Health>Albania</a> with a relatively high life expectancy despite a low GDP per capita.</h3> 
+   
+  </body>
+</html>
