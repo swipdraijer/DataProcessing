@@ -106,8 +106,8 @@ d3.csv("life_expectancy.csv", function(data) {
                                
                 // Create scatterplot
                 svg.selectAll(".title").remove();      
-                updateScatterplot(geo.properties.name, geo.id)
-              
+                updateScatterplot(geo.properties.name, geo.id)                
+                
               });
             },
         
@@ -299,7 +299,7 @@ function updateScatterplot (country, geo, selected_geo) {
     .attr("text-anchor", "middle")
         .text("Life expectancy and GDP per capita " + "(" + country + ", " + data_year + ")");
 
-  // Reverts colour, size and opacity back to standard
+  // Reverts colour, size back to standard
   d3.selectAll('.dot')
   .style('fill', 'steelblue')
   .attr('r', 4.5) 
@@ -309,7 +309,7 @@ function updateScatterplot (country, geo, selected_geo) {
 
     // Highlights selected country
     d3.selectAll('.dot')
-    .style("opacity", 0.5);
+      .style("opacity", 0.9)
 
     d3.select('#' + geo)
     .style('fill', 'orange')

@@ -86,7 +86,6 @@ element.style {
 /*Sets border of dots*/
 .dot {
   stroke: #000;
-  opacity: 1   
 }
 
 /*Sets tooltip*/
